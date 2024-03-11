@@ -13,7 +13,7 @@ CREATE TABLE doctors(
   department TEXT NOT NULL
 );
 
-CREATE TABLE patient(
+CREATE TABLE patients(
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   birthday DATE NOT NULL,
@@ -21,11 +21,11 @@ CREATE TABLE patient(
   medical_record_number INTEGER NOT NULL
 );
 
-CREATE TABLE visit(
+CREATE TABLE visits(
   id SERIAL PRIMARY KEY,
   visit_date DATE NOT NULL,
   doctor_id INTEGER REFERENCES doctors(id) ON DELETE CASCADE,
-  patient_id INTEGER REFERENCES patient(id) ON DELETE CASCADE
+  patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE diseases(
@@ -37,7 +37,7 @@ CREATE TABLE diseases(
 
 CREATE TABLE diagnoses(
   id SERIAL PRIMARY KEY,
-  visit_id INTEGER REFERENCES visit(id) ON DELETE CASCADE,
+  visit_id INTEGER REFERENCES visits(id) ON DELETE CASCADE,
   disease_id INTEGER REFERENCES diseases(id) ON DELETE CASCADE,
   doctor_note TEXT
 );
